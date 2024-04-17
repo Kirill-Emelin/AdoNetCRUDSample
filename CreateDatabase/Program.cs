@@ -16,9 +16,9 @@ namespace CreateDatabase
                 // Открываем соединение
                 connection.Open();
 
-                // Создание команды для создания базы данных "Test1"
+                // Создание команды для создания базы данных "MyFriends"
                 SqlCommand command = new SqlCommand();
-                command.CommandText = "CREATE DATABASE Test1";
+                command.CommandText = "CREATE DATABASE MyFriends";
                 command.Connection = connection;
                 command.ExecuteNonQuery();
 

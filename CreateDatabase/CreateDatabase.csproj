@@ -11,4 +11,11 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Add\Add.csproj" />
+    <ProjectReference Include="..\CreateTable\CreateTable.csproj" />
+    <ProjectReference Include="..\Delete\Delete.csproj" />
+    <ProjectReference Include="..\Update\Update.csproj" />
+  </ItemGroup>
+
 </Project>
