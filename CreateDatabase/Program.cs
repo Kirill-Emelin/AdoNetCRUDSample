@@ -7,23 +7,49 @@ namespace CreateDatabase
     {
         static void Main(string[] args)
         {
-            // Подключение к базе данных
-            string connectionString = "Data Source=.\\MYSQLEXPRESS;Database=master;Integrated Security=SSPI";
-
-            // Создание подключения к базе данных
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            try
             {
-                // Открываем соединение
-                connection.Open();
+                // Создание строки подключения
+                string connectionString = "Data Source=.\\MYSQLEXPRESS;Database=master;Integrated Security=SSPI";
 
-                // Создание команды для создания базы данных "MyFriends"
-                SqlCommand command = new SqlCommand();
-                command.CommandText = "CREATE DATABASE MyFriends";
-                command.Connection = connection;
-                command.ExecuteNonQuery();
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    // Открываем соединение
+                    connection.Open();
 
-                // Вывод сообщения о создании базы данных
-                Console.WriteLine("База данных создана");
+                    // Создание команды для создания базы данных "MyFriends"
+                    SqlCommand command = new SqlCommand();
+                    command.CommandText = "CREATE DATABASE MyFriends";
+                    command.Connection = connection;
+                    command.ExecuteNonQuery();
+
+                    // Вывод сообщения о создании базы данных
+                    Console.WriteLine("База данных создана");
+                }
+            }
+            catch
+            {
+                // Если возникла ошибка, запрашиваем название экземпляра SQL Server у пользователя
+                Console.Write("Введите название экземпляра SQL Server (например, MYSQLEXPRESS): ");
+                string instanceName = Console.ReadLine();
+
+                // Создание строки подключения с учетом названия экземпляра
+                string connectionString = $"Data Source=.\\{instanceName};Database=master;Integrated Security=SSPI";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    // Открываем соединение
+                    connection.Open();
+
+                    // Создание команды для создания базы данных "MyFriends"
+                    SqlCommand command = new SqlCommand();
+                    command.CommandText = "CREATE DATABASE MyFriends";
+                    command.Connection = connection;
+                    command.ExecuteNonQuery();
+
+                    // Вывод сообщения о создании базы данных
+                    Console.WriteLine("База данных создана");
+                }
             }
             Console.Read();
         }
